@@ -1,0 +1,50 @@
+<p-dropdown
+  [options]="menuTypes"
+  [(ngModel)]="selectedMenuType"
+  optionLabel="label"
+  (onChange)="onChangeType($event)"
+>
+</p-dropdown>
+
+<div class="mt-3">
+  <p-dropdown
+    class="mt-3"
+    [options]="tourTypes"
+    optionLabel="label"
+    (onChange)="changeTourType($event)">
+  </p-dropdown>
+</div>
+
+<div class="mt-3">
+  <p-calendar appCanWrite
+    (onSelect)="selectDate($event)"
+    (onClearClick)="selectDate($event)"
+    [showButtonBar]="true"
+  ></p-calendar>
+</div>
+
+<div class="mt-3">
+<!--  <p-button appCanWrite-->
+<!--    label="Error"-->
+<!--    (onClick)="initRestError()"-->
+<!--  >-->
+<!--  </p-button>-->
+<!--  <button appCanWrite>Test btn</button>-->
+</div>
+
+<div>
+  <button (click)="initUserInfo()">Init user info</button>
+
+  <button (click)="addBasket()">Add basket</button>
+</div>
+
+<div class="mt-3">
+  <p-button
+    label="Refresh settings"
+    (onClick)="initSettingsData()"
+  >
+  </p-button>
+
+</div>
+
+<p-toast position="top-left"></p-toast>

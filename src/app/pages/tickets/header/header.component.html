@@ -1,0 +1,22 @@
+<div>
+    <p-menubar [model]="items">
+      <ng-template pTemplate="end">
+        <div class="d-flex">
+          <p-button
+            icon="pi pi-user"
+            class="p-button-text"
+            label="{{userName}}"
+            pTooltip="Logout"
+            (onClick)="onLogout()"
+          >
+          </p-button>
+
+          <div class="ms-2">
+            <div>{{time | date: 'HH:mm:ss'}}</div>
+            <p class="p-0 m-0">{{time | date: 'EEEE'}}</p>
+          </div>
+        </div>
+
+      </ng-template>
+    </p-menubar>
+</div>
