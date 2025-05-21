@@ -1,4 +1,4 @@
-<div class="d-flex flex-column m-auto">
+<!-- <div class="d-flex flex-column m-auto">
   <div class="d-flex justify-content-between align-items-center flex-wrap">
     <span class="mx-3">Login</span>
     <input
@@ -59,5 +59,42 @@
     ></p-button>
   </div>
 
-</div>
+</div> -->
 
+
+<form [formGroup]="registrationForm">
+  <div class="mt-3 d-flex justify-content-between align-items-center flex-wrap">
+    <label for="login">логин:</label>
+    <input id="login" formControlName="login" />
+    <div *ngIf="registrationForm.get('login')?.invalid && registrationForm.get('login')?.touched">
+      <small>логин обязателен</small>
+    </div>
+  </div>
+ 
+  <div class="mt-3 d-flex justify-content-between align-items-center flex-wrap">
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" />
+    <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+      <small *ngIf="registrationForm.get('email').errors?.['required']">Email обязателен</small>
+      <small *ngIf="registrationForm.get('email').errors?.['email']">Введите корректный email</small>
+    </div>
+  </div>
+
+  <div class="mt-3 d-flex justify-content-between align-items-center flex-wrap">
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" formControlName="password" />
+    <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+      <small *ngIf="registrationForm.get('password')?.errors?.['required']">Пароль обязателен</small>
+      <small *ngIf="registrationForm.get('password')?.errors?.['minlength']">Пароль должен содержать минимум 6 символов</small>
+    </div>
+  </div>
+
+   <div class="mt-3 d-flex justify-content-between align-items-center flex-wrap">
+    <label for="cardNumber">номер карты:</label>
+    <input type="cardNumber" id="cardNumber" formControlName="cardNumber" />
+    <div *ngIf="registrationForm.get('cardNumber')?.invalid && registrationForm.get('cardNumber')?.touched">
+    </div>
+  </div>
+
+  <p-button (click)="registration()" [disabled]="registrationForm.invalid">Зарегистрироваться</p-button>
+</form>

@@ -8,6 +8,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RestInterceptorsService} from "./services/interceptors/rest-interceptors.service";
 import {ConfigService} from "./services/config/config.service";
 import { CanWriteDirective } from './directive/can-write.directive';
+import { ReactiveFormsModule } from '@angular/forms';
 
 function initializeApp(config: ConfigService) {
   return () => config.loadPromise().then(() => {
@@ -24,7 +25,8 @@ function initializeApp(config: ConfigService) {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     ConfigService,

@@ -38,7 +38,7 @@ export class AuthService {
     return this.userStorage.find((user) => login === user.login) || null;
   }
 
-  private auth(user: IUser, isRememberMe?: boolean) {
+   auth(user: IUser, isRememberMe?: boolean) {
     console.log('user', user)
     this.currentUser = user;
     this.accessService.initAccess(UserRules);

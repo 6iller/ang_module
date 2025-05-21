@@ -27,36 +27,21 @@ export class AuthorizationComponent implements OnInit {
 
   }
 
-  // onAuth(): void {
-  //   const user: IUser = {
-  //     login: this.login,
-  //     password: this.password,
-  //   }
-  //   const result = this.authService.authUser(this.login, this.password, this.isRememberMe);
-  //   if (result !== true) {
-  //     this.messageService.add({severity:'error', summary: result});
-  //     return;
-  //   }
-  //   this.messageService.add({severity:'success', summary: 'You are authorized!'});
-  // }
     onAuth(): void {
     if (!this.login || !this.password) {
       this.messageService.add({severity:'warn', summary:'Ошибка', detail:'Введите логин и пароль'});
       return;
     }
 
-    const authUser = { login: this.login, password: this.password }; // id не нужен для запроса авторизации
+    const authUser = { login: this.login, password: this.password };
+   
 
-    // URL из вашего задания: 'http://localhost:3000/users/' + authUser.login
-    // Это соответствует POST /users/:login на сервере.
-    // В тело запроса отправляем authUser (логин и пароль).
     this.http.post<IUser>(`http://localhost:3000/users/${authUser.login}`, authUser).subscribe(
-      (data: IUser) => { // data должна быть IUser, если авторизация успешна и сервер возвращает пользователя
+      (data: IUser) => { // если авторизация успешна и сервер возвращает пользователя, то:
         this.messageService.add({severity:'success', summary:'Успех', detail:'Авторизация прошла успешно'});
-        // Здесь вы можете сохранить данные пользователя, например, в localStorage или в сервисе состояния
-        // localStorage.setItem('currentUser', JSON.stringify(data));
-        // this.userService.setCurrentUser(data);
-        this.router.navigate(['tickets/tickets-list']); // или ваш целевой маршрут
+         this.authService.auth(data)
+        // редирект 
+        this.router.navigate(['/tickets']); 
       },
       (error) => {
         const detailMessage = error.error && error.error.message ? error.error.message : 'Ошибка авторизации. Неверный логин или пароль.';

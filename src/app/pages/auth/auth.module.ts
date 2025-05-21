@@ -6,7 +6,7 @@ import { AuthorizationComponent } from './authorization/authorization.component'
 import { TabViewModule } from 'primeng/tabview';
 import { AuthComponent } from './auth.component'
 import { InputTextModule} from 'primeng/inputtext';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CheckboxModule} from "primeng/checkbox";
 import {ButtonModule} from 'primeng/button';
 import { RegistrationComponent } from './registration/registration.component';
@@ -26,6 +26,7 @@ import {MessageService} from 'primeng/api';
     TabViewModule,
     InputTextModule,
     FormsModule,
+    ReactiveFormsModule,
     CheckboxModule,
     ButtonModule,
     ToastModule
