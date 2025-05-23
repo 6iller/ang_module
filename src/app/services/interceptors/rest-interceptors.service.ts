@@ -15,6 +15,7 @@ export class RestInterceptorsService {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.token;
+    // const hasToken=this.authService.getAllToken();
 
     if (token) {
       const clonedReq = req.clone({
@@ -23,5 +24,10 @@ export class RestInterceptorsService {
       return next.handle(clonedReq);
     }
     return next.handle(req);
+    // if(hasToken) {
+    //   const cloned = req.clone({
+    //     headers: req.headers.set('Authorization', "Bearer"+"")
+    //   })
+    // }
   }
 }

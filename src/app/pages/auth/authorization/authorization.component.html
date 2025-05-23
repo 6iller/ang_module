@@ -34,7 +34,7 @@
     <p-button
       label="Sign In"
       [disabled]="!login || !password || login.length < 3 || password.length < 6"
-      (onClick)="onAuth()"
+      (onClick)="onAuth($event)"
     ></p-button>
   </div>
 

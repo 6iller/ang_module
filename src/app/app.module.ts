@@ -35,7 +35,9 @@ function initializeApp(config: ConfigService) {
       useFactory: initializeApp,
       deps: [ConfigService], multi: true
     },
-    {provide: HTTP_INTERCEPTORS, useClass: RestInterceptorsService, multi: true},
+    {provide: 
+      
+      HTTP_INTERCEPTORS, useClass: RestInterceptorsService, multi: true},
   ],
   bootstrap: [AppComponent]
 })
