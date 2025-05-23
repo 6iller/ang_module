@@ -63,7 +63,7 @@ export class AuthorizationComponent implements OnInit {
     this.authService.setUser(authUser);
     const token: string = data.access_token;
     this.authService.setToken(token);
-    this.router.navigate(['tickets/tickets-list']);
+    this.router.navigate(['/tickets']);
         }, 
         (err: HttpErrorResponse)=> {
           const serverError= <ServerError>err.error;
