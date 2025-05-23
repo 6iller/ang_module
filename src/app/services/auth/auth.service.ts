@@ -177,13 +177,12 @@ private userBasketSubject = new Subject();
   }
 
   setToken(token: string | null): void {
-    this.token = token; // Сохраняем токен в классе
-    // При необходимости, токен можно поддерживать в сессии. 
-    // Например, если требуется передавать его в заголовках HTTP запросов, сделайте это в интерсепторе.
+    this.token = token; // Сохраняем токен в классе 
+    // Возможно, если требуется передавать его в заголовках HTTP запросов,нужно сделать это в интерсепторе.
   }
 
   get isAuthenticated(): boolean {
-    return !!this.currentUser; // Аутентификация зависит только от текущего пользователя
+    return !!this.currentUser; // 
   }
 
   get user(): IUser | null {
