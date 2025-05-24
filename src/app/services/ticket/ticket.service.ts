@@ -9,6 +9,8 @@ import {INearestTour, ITour, ITourLocation, ITourTypeSelect} from "../../models/
 export class TicketService {
   private ticketSubject = new Subject<ITourTypeSelect>()
   readonly $ticketType = this.ticketSubject.asObservable()
+  private ticketUpdateSubject = new Subject<ITour[]>();
+  readonly ticketUpdateSubject$ = this.ticketUpdateSubject.asObservable();
 
   constructor(private ticketServiceRest: TicketRestService) {
   }
@@ -57,5 +59,8 @@ export class TicketService {
   sendTourData(data: any) {
     return this.ticketServiceRest.sendTourData(data)
   }
+  updateTicketList(data: ITour[]) {
+  this.ticketUpdateSubject.next(data);
+}
 }
 
