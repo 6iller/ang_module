@@ -7,6 +7,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth/auth.service";
 import {forkJoin, fromEvent, Subscription} from "rxjs";
 import {TicketService} from "../../../services/ticket/ticket.service";
+import { IOrder } from 'src/app/models/order';
 
 @Component({
   selector: 'app-ticket-item',
@@ -47,7 +48,7 @@ export class TicketItemComponent implements OnInit {
       lastName: new FormControl('', [Validators.required, Validators.minLength(5)]),
       cardNumber: new FormControl(''),
       birthday: new FormControl(''),
-      age: new FormControl(22),
+      age: new FormControl(''),
       citizenship: new FormControl(''),
     })
 
@@ -106,6 +107,21 @@ export class TicketItemComponent implements OnInit {
     console.log(this.userForm.value)
     this.ticketService.sendTourData(this.userForm.value).subscribe(console.log)
   }
+
+    initTour(): void {
+      const userData = this.userForm.getRawValue();
+      const postData = {...this.ticket, ...userData};
+
+      const userId = this.authService.user?.id || null;
+      const postObj: IOrder= {
+            age: postData.age,
+    birthDay: postData.birthDay,
+    cardNumber: postData.cardNumber,
+    tourId: postData.tourId,
+    userId: postData.userId,
+      }
+      this.ticketService.sendTourData(postObj).subscribe()
+    }
 
   initSearchTour() {
     console.log('initSearchTour')

@@ -40,7 +40,8 @@ export class TicketListComponent implements OnInit {
   @ViewChild('ticketSearch') ticketSearch: ElementRef;
 
   searchTicketSub: Subscription;
-
+  tickets: any=[]
+  
   constructor(
     private router: Router,
     private ticketStorage: TicketStorageService,
@@ -49,9 +50,9 @@ export class TicketListComponent implements OnInit {
   ) {
   }
 
-  get tickets() {
-    return this.ticketStorage.tickets;
-  }
+  // get tickets() {
+  //   return this.ticketStorage.tickets;
+  // }
 
   get filteredTickets() {
     const search = this.search.toLowerCase()
@@ -63,14 +64,29 @@ export class TicketListComponent implements OnInit {
         && (!this.search || name.toLowerCase().includes(search)));
   }
 
+  // ngOnInit(): void {
+    //   this.ticketStorage.fetchTickets();
+    //   this.tourUnsubscriber = this.ticketService.getTicketTypeObservable().subscribe((data: ITourTypeSelect) => {
+    //     if (data) {
+    //       this.ticketFilterType = {...this.ticketFilterType, ...data};
+  //     }
+  //   });
+  // }
+
   ngOnInit(): void {
-    this.ticketStorage.fetchTickets();
-    this.tourUnsubscriber = this.ticketService.getTicketTypeObservable().subscribe((data: ITourTypeSelect) => {
-      if (data) {
-        this.ticketFilterType = {...this.ticketFilterType, ...data};
+       this.ticketStorage.fetchTickets();
+      this.tourUnsubscriber = this.ticketService.getTicketTypeObservable().subscribe((data: ITourTypeSelect) => {
+        if (data) {
+          this.ticketFilterType = {...this.ticketFilterType, ...data};
       }
     });
-  }
+ 
+    this.tickets= this.ticketStorage.tickets;
+    this.ticketService.ticketUpdateSubject$.subscribe((data)=>{
+      this.tickets= this.tickets.concat(data);
+  });
+}
+
 
   ngOnDestroy() {
     this.tourUnsubscriber.unsubscribe();

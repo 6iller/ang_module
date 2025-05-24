@@ -86,8 +86,8 @@
 
     <div class="mt-4">
       <p-button
-        type="submit"
-        label="Order"
+        (click)="initTour()"
+        label="generate order"
         [disabled]="!userForm.valid"
       >
       </p-button>
@@ -118,3 +118,12 @@
   </p-carousel>
 
 </div>
+
+<!-- <div class="mt-4">
+      <p-button
+        type="submit"
+        label="generate order"
+        [disabled]="!userForm.valid"
+      >
+      </p-button>
+    </div> -->

@@ -5,6 +5,7 @@ import {TicketService} from "../../../services/ticket/ticket.service";
 import {MessageService} from "primeng/api";
 import {SettingsService} from "../../../services/settings/settings.service";
 import {AuthService} from "../../../services/auth/auth.service";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-aside',
@@ -25,7 +26,8 @@ export class AsideComponent implements OnInit {
     private ticketService: TicketService,
     private messageService: MessageService,
     private settingsService: SettingsService,
-    private userService: AuthService
+    private userService: AuthService,
+    private http: HttpClient
   ) {
   }
 
@@ -72,5 +74,13 @@ export class AsideComponent implements OnInit {
     this.settingsService.loadUserSettingsSubject({
       saveToken: false
     })
+  }
+
+  initTours(): void {
+    this.http.get("http://localhost:3000/tours/").subscribe(()=>{});
+  }
+
+  deleteTours(): void {
+    this.http.get("http://localhost:3000/tours/remove").subscribe(()=>{});
   }
 }
