@@ -58,9 +58,10 @@ export class AuthorizationComponent implements OnInit {
       login: this.login,
       cardNumber: this.cardNumber
     }
-    this.http.post<{access_token:string}>
+    this.http.post<{access_token:string, id: string}>
   ('http://localhost:3000/users/'+authUser.login, authUser).subscribe((data)=> {
-    this.authService.setUser(authUser);
+    authUser.id=data.id;
+    // this.authService.setUser(authUser);
     const token: string = data.access_token;
     this.authService.setToken(token);
     this.router.navigate(['/tickets']);
